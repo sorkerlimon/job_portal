@@ -7,6 +7,8 @@ from .views import *
 urlpatterns = [
     path('upload/', upload,name='upload'),
     path('privacy_polic/', privacy_polic,name='privacy_polic'),
+    path('sucessfully/', sucessfulmessage,name='sucessfulmessage'),
+
 
     path('documentsupload/', documents_upload,name='documentsupload'),
     # path('currentjoboffer/', currentjob,name='currentjoboffer'),

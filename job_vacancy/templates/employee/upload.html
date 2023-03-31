@@ -18,55 +18,55 @@
         <div class="form-group">
           <div class="row">
             <div class="col-sm-6">
-              {{ form.country.label }}
+              {{ form.country.label }}<span class="required">*</span>
               {{ form.country }}
             </div>
             <div class="col-sm-6">
-              {{ form.interestedfor.label }}
+              {{ form.interestedfor.label }}<span class="required">*</span>
               {{ form.interestedfor }}
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-sm-6">
-              {{ form.fullname.label }}
+              {{ form.fullname.label }}<span class="required"> *</span>
               {{ form.fullname }}
             </div>
             <div class="col-sm-6">
-              {{ form.phonenumber.label }}
+              {{ form.phonenumber.label }}<span class="required">*</span>
               {{ form.phonenumber }}
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-sm-6">
-              {{ form.dateofbirth.label }}
+              {{ form.dateofbirth.label }}<span class="required">*</span>
               {{ form.dateofbirth }}
             </div>
             <div class="col-sm-6">
-              {{ form.education.label }}
+              {{ form.education.label }}<span class="required">*</span>
               {{ form.education }}
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-sm-6">
-              {{ form.nationalid.label }}
+              {{ form.nationalid.label }}<span class="required">*</span>
               {{ form.nationalid }}
             </div>
             <div class="col-sm-6">
-              {{ form.startingdate.label }}
+              {{ form.startingdate.label }}<span class="required">*</span>
               {{ form.startingdate }}
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-sm-6">
-              {{ form.position.label }}
+              {{ form.position.label }}<span class="required">*</span>
               {{ form.position }}
             </div>
             <div class="col-sm-6">
-              {{ form.shifttime.label }}
+              {{ form.shifttime.label }}<span class="required">*</span>
               {{ form.shifttime }}
             </div>
           </div>
@@ -83,6 +83,8 @@
       </form>
       <br>
     </div>
+
+
   </section>
 </main>
 
@@ -104,8 +106,13 @@
   checkbox.addEventListener('change', checkInputs);
 </script>
 
-
-
+<style>
+  .required {
+    color: red;
+  }
+  
+  
+</style>
 </main>
 
 {% endblock  %}

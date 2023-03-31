@@ -18,6 +18,14 @@ from django.http import HttpResponse, HttpResponseBadRequest
 def page_not_found_view(request, exception):
     return render(request, '404.html', status=404)
 
+
+def sucessfulmessage(request):
+    employee_profile = request.user.employee_profile
+
+    
+    return render(request, 'employee/sucessfull_message.html', {'employee_profile': employee_profile})
+
+
 @login_required(login_url='register')
 @allowed_users(allowed_roles=['employee'])
 def privacy_polic(request):
@@ -79,9 +87,11 @@ def upload(request):
             employee_profile.country = country
             employee_profile.education_degree = education
             employee_profile.save()
+
+  
             
-            # return redirect('profile')
-            return HttpResponse('your document upload is complete')
+            return redirect('sucessfulmessage')
+            # return HttpResponse('your document upload is complete')
         else:
             print(form.errors)
             error_message = "Form submission failed: please check the form fields and try again."
