@@ -80,7 +80,8 @@ def upload(request):
             employee_profile.education_degree = education
             employee_profile.save()
             
-            return redirect('profile')
+            # return redirect('profile')
+            return HttpResponse('your document upload is complete')
         else:
             print(form.errors)
             error_message = "Form submission failed: please check the form fields and try again."
