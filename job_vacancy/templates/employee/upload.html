@@ -1,0 +1,111 @@
+{% extends 'main1.html' %}
+{% load static %}
+<style>
+   .not-visible{
+       display: none;
+   }
+   
+</style>
+{% block content  %}
+
+<main id="main" class="main">
+  <h1>Update your details here</h1>
+  <br>
+  <section class="section profile">
+    <div class="container">
+      <form method="post" enctype="multipart/form-data" id="upload_form">
+        {% csrf_token %}
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.country.label }}
+              {{ form.country }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.interestedfor.label }}
+              {{ form.interestedfor }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.fullname.label }}
+              {{ form.fullname }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.phonenumber.label }}
+              {{ form.phonenumber }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.dateofbirth.label }}
+              {{ form.dateofbirth }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.education.label }}
+              {{ form.education }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.nationalid.label }}
+              {{ form.nationalid }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.startingdate.label }}
+              {{ form.startingdate }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.position.label }}
+              {{ form.position }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.shifttime.label }}
+              {{ form.shifttime }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-12">
+              {{ form.agreementlicens }}
+              <a href="{% url 'privacy_polic' %}"> {{ form.agreementlicens.label }}</a>
+            </div>
+          </div>
+        </div> <!-- end of form-group -->
+        <br><br>
+        <button type="submit" class="button btn btn-primary" disabled>Save</button>
+      </form>
+      <br>
+    </div>
+  </section>
+</main>
+
+<script>
+  const form = document.querySelector('#upload_form');
+  const inputs = Array.from(form.querySelectorAll('input, select'));
+  const checkbox = form.querySelector('input[type="checkbox"]');
+  const submitButton = form.querySelector('button[type="submit"]');
+  
+  function checkInputs() {
+    const allFieldsFilled = inputs.every(input => input.value.trim() !== '');
+    const checkboxChecked = checkbox.checked;
+    submitButton.disabled = !(allFieldsFilled && checkboxChecked);
+  }
+  
+  inputs.forEach(input => {
+    input.addEventListener('input', checkInputs);
+  });
+  checkbox.addEventListener('change', checkInputs);
+</script>
+
+
+
+</main>
+
+{% endblock  %}

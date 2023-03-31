@@ -1,0 +1,179 @@
+{% load static %}
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+   <div class="d-flex align-items-center justify-content-between">
+     <a href="index.html" class="logo d-flex align-items-center">
+       <img src="assets/img/logo.png" alt="">
+       <span class="d-none d-lg-block">IIML JOBS</span>
+     </a>
+     <i class="bi bi-list toggle-sidebar-btn"></i>
+   </div><!-- End Logo -->
+
+   <nav class="header-nav ms-auto">
+     <ul class="d-flex align-items-center">
+
+       <li class="nav-item d-block d-lg-none">
+         <a class="nav-link nav-icon search-bar-toggle " href="#">
+           <i class="bi bi-search"></i>
+         </a>
+       </li><!-- End Search Icon-->
+
+       <li class="nav-item dropdown">
+
+         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+           <i class="bi bi-bell"></i>
+           <span class="badge bg-primary badge-number">4</span>
+         </a><!-- End Notification Icon -->
+
+         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+           <li class="dropdown-header">
+             You have 4 new notifications
+             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+           </li>
+           <li>
+             <hr class="dropdown-divider">
+           </li>
+
+           <li class="notification-item">
+             <i class="bi bi-exclamation-circle text-warning"></i>
+             <div>
+               <h4>Lorem Ipsum</h4>
+               <p>Quae dolorem earum veritatis oditseno</p>
+               <p>30 min. ago</p>
+             </div>
+           </li>
+
+
+         </ul><!-- End Notification Dropdown Items -->
+
+       </li><!-- End Notification Nav -->
+
+
+       <li class="nav-item dropdown pe-3">
+
+         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+           {% comment %} <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> {% endcomment %}
+           <span class="d-none d-md-block dropdown-toggle ps-2">{{employee_profile}}</span>
+         </a>
+         <!-- End Profile Iamge Icon -->
+
+         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+           <li class="dropdown-header">
+             <h6>{{employee_profile}}</h6>
+           </li>
+           <li>
+             <hr class="dropdown-divider">
+           </li>
+
+           <li>
+             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+               <i class="bi bi-person"></i>
+               <span>My Profile</span>
+             </a>
+           </li>
+           <li>
+             <hr class="dropdown-divider">
+           </li>
+
+           <li>
+             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+               <i class="bi bi-gear"></i>
+               <span>Account Settings</span>
+             </a>
+           </li>
+           <li>
+             <hr class="dropdown-divider">
+           </li>
+
+           <li>
+             <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+               <i class="bi bi-question-circle"></i>
+               <span>Need Help?</span>
+             </a>
+           </li>
+           <li>
+             <hr class="dropdown-divider">
+           </li>
+
+           <li>
+             <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+               <i class="bi bi-box-arrow-right"></i>
+               <span>Sign Out</span>
+             </a>
+           </li>
+
+         </ul><!-- End Profile Dropdown Items -->
+       </li><!-- End Profile Nav -->
+
+     </ul>
+   </nav><!-- End Icons Navigation -->
+
+ </header><!-- End Header -->
+
+
+
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+
+     {% if request.user.is_authenticated %}
+     {% for group_for in request.user.groups.all %}
+
+      {% if group_for.name == 'employee' %}
+
+
+
+         {% if request.user.employee_profile.employee_cv.meet_link_sent %}
+         
+          <li class="nav-item"> <a class="nav-link " href="{% url 'dashboard' %}"> <i class="bi bi-grid"></i> <span>Dashboard</span> </a></li>
+         {% endif %}
+
+         
+         {% if request.user.employee_profile.employee_cv.meet_link_sent and request.user.employee_profile.license %}
+      
+          <li class="nav-item"> <a class="nav-link " href="{% url 'agrement' pk=employee_profile.id %}"> <i class="bi bi-file-earmark-text"></i> <span>Agreement Paper</span> </a></li>
+         {% endif %}
+
+       
+
+        
+
+         {% if request.user.employee_profile.employee_cv.agreementlicens  %}
+
+
+          <li class="nav-item"> <a class="nav-link collapsed" href="{% url 'documentsupload' %}"> <i class="bi bi-person"></i> <span>Documnets Upload</span> </a></li>
+         <li class="nav-item"> <a class="nav-link collapsed" href="{% url 'job_portal' %}"> <i class="bi bi-person"></i> <span>Job List</span> </a></li>
+
+          {% else %}
+
+          <li class="nav-item"> <a class="nav-link " href="{% url 'upload' %}"> <i class="bi bi-cloud-arrow-up"></i> <span>Update Your details</span> </a></li>
+
+          {% endif %}
+
+
+         <li class="nav-item"> <a class="nav-link collapsed" href="{% url 'profile' %}"> <i class="bi bi-person"></i> <span>Profile</span> </a></li>
+
+
+
+         
+      {% endif %}
+
+      {% if group_for.name == 'hr' %}
+      <li class="nav-item"> <a class="nav-link " href="{% url 'hrdashboard' %}"> <i class="bi bi-grid"></i> <span>HR Dashboard</span> </a></li>
+      <li class="nav-item"> <a class="nav-link " href="{% url 'user_management' %}"> <i class="bi bi-sliders"></i> <span>User Managemnet</span> </a></li>
+     {% endif %}
+     
+     {%endfor%}
+
+
+     {% comment %} <li class="nav-heading">Pages</li> {% endcomment %}
+     <li class="nav-item"> <a class="nav-link collapsed" href="{% url 'logout' %}"> <i class="bi bi-box-arrow-in-left"></i> <span>logout</span> </a></li>
+     {% else %}
+     <li class="nav-item"> <a class="nav-link collapsed" href=""> <i class="bi bi-box-arrow-in-right"></i> <span>Login/Sign Up</span> </a></li>
+     {% endif %}
+     
+  </ul>
+</aside>

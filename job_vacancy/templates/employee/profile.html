@@ -1,0 +1,231 @@
+{% extends 'main1.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main id="main" class="main">
+  <div class="pagetitle">
+
+     <h1>Profile</h1>
+     
+
+     <nav>
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="">Home</a></li>
+           <li class="breadcrumb-item">Employee</li>
+           <li class="breadcrumb-item active">Profile</li>
+        </ol>
+     </nav>
+  </div>
+                  {% for message in messages %}
+                   <div class="alert {{ message.tags }}" role="alert">
+                       {{ message }}
+                   </div>
+                   {% endfor %}
+  <section class="section profile">
+     <div class="row">
+        <div class="col-xl-4">
+           <div class="card">
+              <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                 <img src="{{ profile.employee_profile.profile_pic.url }}" alt="Profile" style="border-radius: 15%;">
+                 <h2></h2><br>
+                 <b>{{ profile.employee_profile.name }}</b>
+                 <h6></h6>
+              </div>      
+           </div>
+           
+        </div>
+        <div class="col-xl-8">
+           <div class="card">
+              <div class="card-body pt-3">
+                 <ul class="nav nav-tabs nav-tabs-bordered">
+                     <li class="nav-item"> <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button></li>
+                     {% if request.user.employee_profile.employee_cv.meet_link_sent %}
+                        <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Apply For Job</button></li>
+                     {% endif %}
+                 </ul>
+                 <div class="tab-content pt-2">
+                     <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                       <h5 class="card-title">Profile Details</h5>
+                       <div class="row">
+                          <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                          <div class="col-lg-9 col-md-8">{{ profile.employee_profile.name }}</div>
+                       </div>
+
+                       <div class="row">
+                          <div class="col-lg-3 col-md-4 label">Account Email</div>
+                          <div class="col-lg-9 col-md-8">{{ profile.email }}</div>
+                       </div>
+
+                       <div class="row">
+                          <div class="col-lg-3 col-md-4 label">Contact Number</div>
+                          <div class="col-lg-9 col-md-8">{{ profile.employee_profile.phone }}</div>
+                       </div>
+
+                       <div class="row">
+                        <div class="col-lg-3 col-md-4 label">National ID </div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.nid }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Bank Account</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.bank_account }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Date of Birth</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.dob }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Nationality</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.country }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">City</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.city }}</div>
+                     </div>
+
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Present Address</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.present_address }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Permanent Address</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.parmanenet_address }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Emergency Contact Number</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.emergency_phone }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Education Degree</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.education_degree }}</div>
+                     </div>
+
+
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Working Hours</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.working_hours }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Have Computer</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.have_computer }}</div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Comment</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.comment }}</div>
+                     </div>
+
+                     {% comment %} <div class="row">
+                        <div class="col-lg-3 col-md-4 label">License</div>
+                        <div class="col-lg-9 col-md-8">{{ profile.employee_profile.license }}</div>
+                     </div> {% endcomment %}
+
+
+                    </div>
+
+
+                    {% if request.user.employee_profile.employee_cv.meet_link_sent %}
+
+                     <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                        <form class="form" method="POST" action="{% url 'profile' %}" enctype="multipart/form-data"> 
+                           
+                           <!--calling profile edit form from view (action) -->
+                           {% csrf_token %}
+                           {% for field in form %}
+                              <div class="profile-edit pt-3">
+                                    <div class="row mb-3">
+                                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">{{field.label}} </label>
+
+                                       <div class="col-md-8 col-lg-9">{{field}}</div>
+                                    </div>
+                              </div>
+                           {% endfor %}
+                           <div class=""> <input type="submit" class="btn btn-primary " value="Apply" /></div>
+                           </form>
+                     </div>
+                     {% endif %}
+
+
+
+
+
+                       <div class="tab-pane fade pt-3" id="profile-settings">
+                                 
+
+                           {% comment %} <form class="form" method="POST" action="{% url 'profile' %}" enctype="multipart/form-data"> 
+                           
+                              <!--calling profile edit form from view (action) -->
+                              {% csrf_token %}
+                              {% for field in form2 %}
+                                 <div class="profile-edit pt-3">
+                                       <div class="row mb-3">
+                                          <label for="fullName" class="col-md-4 col-lg-3 col-form-label">{{field.label}} </label>
+   
+                                          <div class="col-md-8 col-lg-9">{{field}}</div>
+                                       </div>
+                                 </div>
+                              {% endfor %}
+                              <div class=""> <input type="submit" class="btn btn-primary " value="Submit" /></div>
+                           </form>  {% endcomment %}
+       
+                         </div>
+
+
+
+                     <div class="tab-pane fade pt-3" id="profile-change-password">
+                        <form>
+                           <div class="row mb-3">
+                              <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                              <div class="col-md-8 col-lg-9"> <input name="password" type="password" class="form-control" id="currentPassword"></div>
+                           </div>
+                           <div class="row mb-3">
+                              <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                              <div class="col-md-8 col-lg-9"> <input name="newpassword" type="password" class="form-control" id="newPassword"></div>
+                           </div>
+                           <div class="row mb-3">
+                              <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                              <div class="col-md-8 col-lg-9"> <input name="renewpassword" type="password" class="form-control" id="renewPassword"></div>
+                           </div>
+                           <div class="text-center"> <button type="submit" class="btn btn-primary">Change Password</button></div>
+                        </form>
+                     </div>
+                     </div>
+
+                  
+
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+       <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+   <div class="copyright">
+     &copy; Copyright <strong><span>Intelligent Management Limited</span></strong>. All Rights Reserved
+   </div>
+   <div class="credits">
+     <!-- All the links in the footer should remain intact. -->
+     <!-- You can delete the links only if you purchased the pro version. -->
+     <!-- Licensing information: https://bootstrapmade.com/license/ -->
+     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+     Designed by <a href="https://bootstrapmade.com/">IIML System Team</a>
+   </div>
+ </footer>
+ 
+ <!-- End Footer -->
+  </section> 
+</main>
+
+{% endblock  %}

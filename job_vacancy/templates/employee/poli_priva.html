@@ -1,0 +1,41 @@
+{% extends 'main1.html' %}
+{% load static %}
+<style>
+   .not-visible{
+       display: none;
+   }
+</style>
+{% block content  %}
+<main id="main" class="main">
+  <h1>Read Carefully</h1>
+  <br>
+  <section class="section profile">
+    <div class="container">
+        <b> 1. Personal Information:</b> You are providing us with your personal information, including your name, contact details, work history, education, and other relevant details. You consent to our collection, use, and storage of this information for the purpose of evaluating your application and potentially offering you employment.
+        <br>
+        <b>2. Verification:</b> You understand that we may need to verify the information you provide, including conducting background checks, reference checks, and other assessments. You consent to our conducting these checks as part of our evaluation process.
+        <br>
+        <b>3. Communication:</b> You consent to our contacting you via phone, Email, Google Meet, Zoom, or other communication channels regarding your application and potential employment. You understand that we may need to contact you to request additional information or schedule interviews.
+        <br>
+        <b>4. Job Description:</b> You understand that the job description provided is not an exhaustive list of all duties, responsibilities, and qualifications required for the position. You acknowledge that the duties and responsibilities of the position may change from time to time.
+        <br>
+        <b>5. Non-Disclosure Agreement:</b> You agree to maintain the confidentiality of any confidential information that you may come across during the recruitment process. You acknowledge that any unauthorized disclosure of confidential information may result in the termination of your application.
+        <br>
+        <b>6. Non-Discrimination:</b> You understand that we are an equal opportunity employer and that we do not discriminate on the basis of race, color, religion, national origin, sex, age, disability, or any other protected status under applicable laws.
+        <br>
+        <b>7. Right to Withdraw:</b> You have the right to withdraw your application at any time. If you wish to do so, you must inform us in writing.
+        <br>
+        <b>8. Release of Liability:</b> You agree to release our organization, its affiliates, officers, directors, employees, and agents from any liability arising out of or in connection with your application for employment, including any consequences of any actions taken by us as a result of your application.
+        <br>
+        <b>9. Agreement to Terms and Conditions:</b> By submitting your application, you acknowledge that you have read and understood these terms and conditions and agree to be bound by them.
+        <br> 
+        We reserve the right to modify these terms and conditions at any time without notice. If you have any questions or concerns about these terms and conditions, please contact us before submitting your application at <br> jobs@iimdirect.com 
+        <br>
+        <br>
+        <button class="btn" style="background-color: rgb(233, 16, 34); color: white; font-weight: bold;">
+            <a href="{% url 'upload' %}" style="color: white; text-decoration: none;">Back</a>
+        </button>
+    </div>
+  </section>
+</main>
+{% endblock %}

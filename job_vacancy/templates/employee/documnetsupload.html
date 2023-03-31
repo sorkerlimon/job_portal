@@ -1,0 +1,77 @@
+{% extends 'main1.html' %}
+{% load static %}
+<style>
+   .not-visible{
+       display: none;
+   }
+   
+</style>
+{% block content  %}
+
+<main id="main" class="main">
+  <h1>Upload Required Documents</h1>
+  <br>
+  <section class="section profile">
+    <div class="container">
+      <br><br><br><br>
+      <form method="post"  enctype="multipart/form-data" id="upload_form">
+        {% csrf_token %}
+        <div class="form-group">
+          
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.nid_birthcertificate.label }}
+              {{ form.nid_birthcertificate }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.education_certificate.label }}
+              {{ form.education_certificate }}
+            </div>
+          </div>
+          <br>
+
+
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form.chairman_certificate.label }}
+              {{ form.chairman_certificate }}
+            </div>
+            <div class="col-sm-6">
+              {{ form.testimonial.label }}
+              {{ form.testimonial }}
+            </div>
+          </div>
+          <br>
+
+
+
+        </div> <!-- end of form-group -->
+        <button type="submit" class="button btn btn-primary " disabled>Save</button>
+      </form>
+      <br>
+    </div>
+  </section>
+</main>
+
+
+
+    <script>
+      const form = document.querySelector('#upload_form');
+      const inputs = Array.from(form.querySelectorAll('input, select'));
+    
+      function checkInputs() {
+        const allFieldsFilled = inputs.every(input => input.value.trim() !== '');
+        document.querySelector('button[type="submit"]').disabled = !allFieldsFilled;
+      }
+    
+      inputs.forEach(input => {
+        input.addEventListener('input', checkInputs);
+      });
+    </script>
+
+
+
+
+</main>
+
+{% endblock  %}

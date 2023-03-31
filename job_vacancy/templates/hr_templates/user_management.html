@@ -1,0 +1,191 @@
+{% extends 'main1.html' %}
+{% load static %}
+
+{% block content  %}
+
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>User Management Template</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="">Home</a></li>
+             <li class="breadcrumb-item active">User List</li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section dashboard">
+
+      {% for message in messages %}
+      <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="True">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      </div>
+      {% endfor %}
+      
+      
+       <div class="row">
+          <div class="col-lg-12">
+
+                
+
+
+                <div class="col-12">
+                   <div class="card recent-sales overflow-auto">
+                      <div class="card-body">
+                         <h5 class="card-title">User CV Table </h5>
+
+                        <form method="POST" action="{% url 'send_meet_link' %}">
+                           {% csrf_token %}
+                           <table class="table table-borderless datatable" style='width:100%'>
+                               <thead>
+                                   <tr>
+                                       <th scope="col">Select</th>
+                                       <th scope="col">Name</th>
+                                       <th scope="col">Contact Email</th>
+                                       <th scope="col">Phone Number</th>
+                                       {% comment %} <th scope="col">CV</th> {% endcomment %}
+                                       <th scope="col">Location</th>
+
+                                   
+                                       <th scope="col">Meet Link</th>
+
+                                       <th scope="col">Interested</th>
+                                       <th scope="col">Join Date</th>
+                                       <th scope="col">Position</th>
+                                       <th scope="col">Shift Time</th>
+                                       <th scope="col">License</th>
+
+
+
+
+
+
+
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                   {% for p in all_user %}
+                                       <tr>
+                                           <td> <input type="checkbox" name="tag" value="{{ p.p_user.id }}" /> </td>
+                                           <td>{{ p.p_user.name }}</td>
+                                           <td>{{ p.p_user.user.email }}</td>
+                                           <td>{{ p.p_user.phone }}</td>
+                                           {% comment %} <td><a href="{{ p.cv.url }}" target="_blank">{{ p.cv.name }}</a></td> {% endcomment %}
+                                           <td>{{ p.country }}</td>
+
+
+                                           <td>
+                                               <input type="text" name="meet_link" value="https://meet.google.com/qje-zrpa-nem" readonly />
+                                           </td>
+                                           <td>{{ p.interestedfor }}</td>
+                                           <td>{{ p.startingdate }}</td>
+                                           <td>{{ p.position }}</td>
+                                           <td>{{ p.shifttime }}</td>
+                                           <td>{% if p.agreementlicens %}<input type="checkbox" checked disabled>{% else %}<input type="checkbox" disabled>{% endif %}</td>
+
+
+                                           
+
+
+
+                                       </tr>
+                                   {% endfor %}  
+                               </tbody>
+                           </table>
+                           <button type="submit" class="btn btn-info">Send Meet Link</button>
+                       </form>
+                       
+
+                      </div>
+                   </div>
+                </div>
+
+                
+                <div class="col-12">
+                  <div class="card recent-sales overflow-auto">
+                     <div class="card-body">
+                        <h5 class="card-title">After Meeting Complete Table </h5>
+
+
+                          <table class="table table-borderless datatable" style='width:100%'>
+                              <thead>
+                                  <tr>
+                                      <th scope="col">Select</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Contact Email</th>
+                                      <th scope="col">Phone Number</th>
+                                      {% comment %} <th scope="col">CV</th> {% endcomment %}
+                                      <th scope="col">Last Updated</th>
+                        
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for p in all_user_complete %}
+                                      <tr>
+                                          <td> <input type="checkbox" name="tag" value="{{ p.p_user.id }}" /> </td>
+                                          <td>{{ p.p_user.name }}</td>
+                                          <td>{{ p.p_user.user.email }}</td>
+                                          <td>{{ p.p_user.phone }}</td>
+                                          {% comment %} <td><a href="{{ p.cv.url }}" target="_blank">{{ p.cv.name }}</a></td> {% endcomment %}
+                                          <td>{{ p.uploaded_on }}</td>
+                                      </tr>
+                                  {% endfor %}  
+                              </tbody>
+                          </table>
+
+                      
+
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                   <div class="card-body">
+                      <h5 class="card-title">Dashboard User Table </h5>
+
+
+                        <table class="table table-borderless datatable" style='width:100%'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Select</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Contact Email</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">CV</th>
+                                    <th scope="col">Last Updated</th>
+                      
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for p in dashboard_complete %}
+                                    <tr>
+                                        <td> <input type="checkbox" name="tag" value="{{ p.p_user.id }}" /> </td>
+                                        <td>{{ p.p_user.name }}</td>
+                                        <td>{{ p.p_user.user.email }}</td>
+                                        <td>{{ p.p_user.phone }}</td>
+                                        <td><a href="{{ p.cv.url }}" target="_blank">{{ p.cv.name }}</a></td>
+                                        <td>{{ p.uploaded_on }}</td>
+                                    </tr>
+                                {% endfor %}  
+                            </tbody>
+                        </table>
+                   </div>
+                </div>
+             </div>
+
+
+
+ </main>
+ 
+ 
+ 
+ {% endblock  %}
+
+

@@ -1,0 +1,55 @@
+{% extends 'main1.html' %}
+{% load static %}
+
+{% block content  %}
+
+
+<main id="main" class="main">
+   <div class="pagetitle">
+     <h1>Agreement Paper</h1>
+     <nav>
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="">Home</a></li>
+         <li class="breadcrumb-item active">Agreement</li>
+       </ol>
+     </nav>
+   </div>
+   <section class="section dashboard">
+     <div class="gallery">
+       <div class="item">
+         <a href="{{ agrements_paper.agreement_1.url }}" target="_blank">
+           <img src="{{ agrements_paper.agreement_1.url }}" alt="">
+           <h2></h2>
+         </a>
+         <a href="{{ agrements_paper.agreement_1.url }}" target="_blank" download>
+           <i class="bi bi-cloud-arrow-down-fill download-icon"></i>
+         </a>
+       </div>
+     </div>
+     <div class="gallery">
+       <div class="item">
+         <a href="{{ agrements_paper.agreement_2.url }}" target="_blank">
+           <img src="{{ agrements_paper.agreement_2.url }}" alt="">
+           <h2></h2>
+         </a>
+         <a href="{{ agrements_paper.agreement_2.url }}" target="_blank" download>
+           <i class="bi bi-cloud-arrow-down-fill download-icon"></i>
+         </a>
+       </div>
+     </div>
+   </section>
+   <style>
+     .download-icon {
+       font-size: 50px; /* adjust the size of the icon */
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin-top: 10px;
+     }
+   </style>
+ </main>
+ 
+
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'main1.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main id="main" class="main">
+  <div class="pagetitle">
+
+     <h1>Job Apply</h1>
+     
+
+     <nav>
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="">Home</a></li>
+           <li class="breadcrumb-item">Employee</li>
+           <li class="breadcrumb-item active">Profile</li>
+        </ol>
+     </nav>
+  </div>
+
+  <section class="section profile">
+     <div class="row">
+        <div class="col-xl-12">
+
+        <div class="card">
+            <form class="form" method="POST" action="{% url 'profile' %}" enctype="multipart/form-data"> 
+                {% csrf_token %}
+                <div class="row">
+                    {% for field in form %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}" class="col-form-label">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>  
+                <br>
+                <div class=""> <input type="submit" class="btn btn-primary " value="Apply" /></div>
+            </form>
+        </div>
+
+           
+        </div>
+     </div>
+       <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+   <div class="copyright">
+     &copy; Copyright <strong><span>Intelligent Management Limited</span></strong>. All Rights Reserved
+   </div>
+   <div class="credits">
+     Designed by <a >IIML System Team</a>
+   </div>
+ </footer>
+ 
+ <!-- End Footer -->
+  </section> 
+</main>
+
+{% endblock  %}
+
+                        {% comment %} <div class="form-check"> <input class="form-check-input" type="checkbox" name="tag" value= > <label class="form-check-label" for="changesMade"> By registering and submitting with IIMI, you accept our License agreements, Privacy policy and Terms of use, and agree to receive emails, text or phone calls.</label></div> {% endcomment %}
